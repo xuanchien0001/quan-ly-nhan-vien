@@ -3,9 +3,10 @@ function dom(element) {
 }
 let list_staff = new List_staff();
 list_staff.arr = getLocalStorage() || [];
-let result_validation = validation();
+let result_validation;
 // handle "Thêm người dùng"
 dom("#btnThemNV").addEventListener("click", function () {
+  result_validation = validation("add");
   list_staff.addStaff(result_validation);
 });
 // handle "Thêm nhân viên"
@@ -52,17 +53,28 @@ function deleteStaff(index) {
   list_staff.deleteStaff(index);
 }
 // sửa thông tin nhân viên
+let indexEdit = -1;
 function editStaff(index) {
-  list_staff.editStaff(index);
-  dom("#btnCapNhat").addEventListener("click", function () {
-    list_staff.arr[index] = getInfoEmployee();
-    renderDSSV(list_staff.arr);
-    setLocalStorage(list_staff.arr);
-    dom("#btnThemNV").disabled = false;
-    dom("#tknv").disabled = false;
-    // resetForm();
-  });
+  indexEdit = index;
+  list_staff.editStaff(indexEdit);
 }
+dom("#btnCapNhat").addEventListener("click", function () {
+  console.log(indexEdit);
+  let isRender = true;
+  let result_validationUpdate = validation("update");
+  for (let i = 1; i < result_validationUpdate.length; i++) {
+    if (result_validationUpdate[i] === false) {
+      isRender = false;
+      break;
+    }
+  }
+  list_staff.arr[indexEdit] = getInfoEmployee();
+  isRender ? renderDSSV(list_staff.arr) : "";
+  setLocalStorage(list_staff.arr);
+  dom("#btnThemNV").disabled = false;
+  dom("#tknv").disabled = false;
+  // resetForm();
+});
 // reset Form
 function resetForm() {
   dom("#myForm").reset();

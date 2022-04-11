@@ -1,25 +1,40 @@
-function validation() {
-  let result = [true, true, true, true, true, true, true, true];
+function validation(chucNang) {
+  let result = [false, true, true, true, true, true, true, true];
+  let result_update = [true, true, true, true, true, true, true, true];
   // check tài khoản
   let id = document.getElementById("tknv");
-  id.onblur = () => {
+  if (chucNang !== "update") {
     let isValid = true;
-    if (id.value.length >= 4 && id.value.length <= 6) {
-      document.getElementById("tbTKNV").innerHTML = "";
-      document.getElementById("tbTKNV").style.display = "none";
-      isValid = true;
+    const regexNumber = /^[0-9]+$/;
+    if (
+      id.value.length >= 1 &&
+      id.value.length <= 6 &&
+      id.value.match(regexNumber)
+    ) {
+      for (item of list_staff.arr) {
+        if (item.id == id.value) {
+          document.getElementById("tbTKNV").innerHTML = "Tài khoản đã tồn tại!";
+          document.getElementById("tbTKNV").style.display = "block";
+          isValid = false;
+          break;
+        } else {
+          document.getElementById("tbTKNV").innerHTML = "";
+          document.getElementById("tbTKNV").style.display = "none";
+          isValid = true;
+        }
+      }
     } else {
       document.getElementById("tbTKNV").innerHTML =
-        "Tài khoản phải có từ 4 đến 6 ký tự!";
+        "Tài khoản phải có từ 4 đến 6 ký tự số!";
       document.getElementById("tbTKNV").style.display = "block";
-
       isValid = false;
     }
     result[0] = isValid;
-  };
+    result_update[0] = isValid;
+  }
   // check tên
   let name = document.getElementById("name");
-  name.onblur = () => {
+  if (true) {
     let isValid = true;
     let tbTen = document.getElementById("tbTen");
     function removeAscent(str) {
@@ -46,10 +61,11 @@ function validation() {
       isValid = false;
     }
     result[1] = isValid;
-  };
+    result_update[1] = isValid;
+  }
   // check email
   let email = document.getElementById("email");
-  email.onblur = () => {
+  if (true) {
     let regexEmail =
       /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
     let isValid = true;
@@ -64,11 +80,12 @@ function validation() {
       isValid = false;
     }
     result[2] = isValid;
-  };
+    result_update[2] = isValid;
+  }
 
   // check password
   let password = document.getElementById("password");
-  password.onblur = () => {
+  if (true) {
     let isValid = true;
     let tbMatKhau = document.getElementById("tbMatKhau");
     let regexPassword = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{6,10}$/;
@@ -77,6 +94,7 @@ function validation() {
       tbMatKhau.style.display = "block";
       isValid = false;
       result[3] = isValid;
+      result_update[3] = isValid;
       return;
     }
     if (regexPassword.test(password.value)) {
@@ -90,10 +108,11 @@ function validation() {
       isValid = false;
     }
     result[3] = isValid;
-  };
+    result_update[3] = isValid;
+  }
   // check ngày bắt đầu làm việc
   let start_day = document.getElementById("datepicker");
-  start_day.onblur = () => {
+  if (true) {
     let isValid = true;
     let tbNgayBatDau = document.getElementById("tbNgay");
     let isValidDate = Date.parse(start_day.value);
@@ -107,10 +126,11 @@ function validation() {
       isValid = true;
     }
     result[4] = isValid;
-  };
+    result_update[4] = isValid;
+  }
   // check lương cơ bản
   let basic_pay = document.getElementById("luongCB");
-  basic_pay.onblur = () => {
+  if (true) {
     let tbLuongCB = document.getElementById("tbLuongCB");
     let isValid = true;
     if (isNaN(basic_pay.value)) {
@@ -118,9 +138,10 @@ function validation() {
       tbLuongCB.style.display = "block";
       isValid = false;
       result[5] = isValid;
+      result_update[5] = isValid;
       return;
     }
-    if (basic_pay.value <= 20000000 && basic_pay.value >= 1000000) {
+    if (basic_pay.value <= 20000000 && basic_pay.value >= 1) {
       tbLuongCB.innerHTML = "";
       isValid = true;
     } else {
@@ -129,10 +150,11 @@ function validation() {
       isValid = false;
     }
     result[5] = isValid;
-  };
+    result_update[5] = isValid;
+  }
   // check chức vụ
   let position = document.getElementById("chucvu");
-  position.onblur = () => {
+  if (true) {
     let tbChucVu = document.getElementById("tbChucVu");
     let isValid = true;
     if (position.value == "") {
@@ -144,10 +166,11 @@ function validation() {
       isValid = true;
     }
     result[6] = isValid;
-  };
+    result_update[6] = isValid;
+  }
   // check tổng giờ làm trong tháng
   let total_work_hours_in_month = document.getElementById("gioLam");
-  total_work_hours_in_month.onblur = () => {
+  if (true) {
     let tbGioLam = document.getElementById("tbGiolam");
     let isValid = true;
     if (isNaN(total_work_hours_in_month.value * 1)) {
@@ -155,6 +178,7 @@ function validation() {
       tbGioLam.style.display = "block";
       isValid = false;
       result[7] = isValid;
+      result_update[7] = isValid;
       return;
     }
     if (
@@ -169,7 +193,11 @@ function validation() {
       isValid = false;
     }
     result[7] = isValid;
-  };
-
-  return result;
+    result_update[7] = isValid;
+  }
+  if (chucNang === "update") {
+    return result_update;
+  } else {
+    return result;
+  }
 }

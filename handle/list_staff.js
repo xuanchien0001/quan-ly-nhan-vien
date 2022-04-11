@@ -8,6 +8,7 @@ function List_staff() {
         break;
       }
     }
+    // console.log(isRender);
     let employee = getInfoEmployee();
     if (isRender) {
       this.arr.push(employee);
