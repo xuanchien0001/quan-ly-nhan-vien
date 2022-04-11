@@ -7,7 +7,7 @@ function validation(chucNang) {
     let isValid = true;
     const regexNumber = /^[0-9]+$/;
     if (
-      id.value.length >= 1 &&
+      id.value.length >= 4 &&
       id.value.length <= 6 &&
       id.value.match(regexNumber)
     ) {
@@ -141,7 +141,7 @@ function validation(chucNang) {
       result_update[5] = isValid;
       return;
     }
-    if (basic_pay.value <= 20000000 && basic_pay.value >= 1) {
+    if (basic_pay.value <= 20000000 && basic_pay.value >= 1000000) {
       tbLuongCB.innerHTML = "";
       isValid = true;
     } else {

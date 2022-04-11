@@ -59,7 +59,6 @@ function editStaff(index) {
   list_staff.editStaff(indexEdit);
 }
 dom("#btnCapNhat").addEventListener("click", function () {
-  console.log(indexEdit);
   let isRender = true;
   let result_validationUpdate = validation("update");
   for (let i = 1; i < result_validationUpdate.length; i++) {
@@ -73,7 +72,7 @@ dom("#btnCapNhat").addEventListener("click", function () {
   setLocalStorage(list_staff.arr);
   dom("#btnThemNV").disabled = false;
   dom("#tknv").disabled = false;
-  // resetForm();
+  resetForm();
 });
 // reset Form
 function resetForm() {
@@ -96,7 +95,7 @@ function renderDSSV(arr) {
         <td>${item.email}</td>
         <td>${item.start_day}</td>
         <td>${item.position}</td>
-        <td>${item.gross_salary}</td>
+        <td>${item.gross_salary.toLocaleString("vi")}</td>
         <td>${item.rank_employee}</td>
         <td>
            <button class="btn btn-danger" onclick="deleteStaff(${index})">Xóa</button>
