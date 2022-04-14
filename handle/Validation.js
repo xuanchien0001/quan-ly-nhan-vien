@@ -88,7 +88,7 @@ function validation(chucNang) {
   if (true) {
     let isValid = true;
     let tbMatKhau = document.getElementById("tbMatKhau");
-    let regexPassword = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{6,10}$/;
+    let regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,10}$/;
     if (password.value.length < 6 || password.value.length > 10) {
       tbMatKhau.innerHTML = "Mật khẩu phải có từ 6 đến 10 ký tự!";
       tbMatKhau.style.display = "block";
