@@ -8,12 +8,13 @@ function List_staff() {
         break;
       }
     }
-    // console.log(isRender);
     let employee = getInfoEmployee();
     if (isRender) {
       this.arr.push(employee);
       renderDSSV(this.arr);
       setLocalStorage(this.arr);
+      dom("#btnDong").click();
+      resetForm();
     }
   };
   this.deleteStaff = function (index) {

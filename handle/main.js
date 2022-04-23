@@ -73,6 +73,7 @@ dom("#btnCapNhat").addEventListener("click", function () {
   dom("#btnThemNV").disabled = false;
   dom("#tknv").disabled = false;
   resetForm();
+  dom("#btnDong").click();
 });
 // reset Form
 function resetForm() {
